@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+.fi-sidebar {
+    @apply !bg-[#424242];
+}
+.fi-sidebar-header{
+    @apply !bg-[#424242];
+}
+.fi-sidebar-item-label {
+    @apply !text-[#ffffff];
+}
+.fi-sidebar-item-icon{
+    @apply !text-[#ffffff];
+}
+.fi-sidebar-item-button{
+    @apply !bg-[#424242];
+}
+.fi-sidebar-item-button:hover{
+    @apply !bg-[#616161];
+}
