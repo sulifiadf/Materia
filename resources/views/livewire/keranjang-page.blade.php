@@ -70,9 +70,9 @@
                     <span class="font-semibold">Total:</span>
                     <span>Rp 110.000</span>
                 </div>
-                <button class="w-full bg-[#424242] text-white py-2 rounded-md hover:bg-black">
+                <a href="{{route('livewire.checkout-page')}}" class="w-full bg-[#424242] text-white py-2 rounded-md hover:bg-black">
                     Checkout
-                </button>
+                </a>
             </div>
         </div>
     </div>
