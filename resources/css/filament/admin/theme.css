@@ -7,10 +7,10 @@
 @config 'tailwind.config.js';
 
 .fi-sidebar {
-    @apply !bg-[#424242];
+    @apply !bg-gray-custom;
 }
 .fi-sidebar-header{
-    @apply !bg-[#424242];
+    @apply !bg-gray-custom;
 }
 .fi-sidebar-item-label {
     @apply !text-[#ffffff];
@@ -19,8 +19,34 @@
     @apply !text-[#ffffff];
 }
 .fi-sidebar-item-button{
-    @apply !bg-[#424242];
+    @apply !bg-gray-custom;
 }
 .fi-sidebar-item-button:hover{
     @apply !bg-[#616161];
 }
+.fi-wi-stats-overview-stat {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.custom-stat-layout .stat-icon svg {
+    font-size: 2rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.custom-stat-layout .stat-icon svg {
+    color: #FFB97B !important;
+}
+
+.fi-wi-chart-widget > section.fi-section {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),
+                0 4px 6px -2px rgba(0,0,0,0.05) !important;
+}
+
+
+

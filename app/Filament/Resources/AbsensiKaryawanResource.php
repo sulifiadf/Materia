@@ -12,25 +12,37 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 
 class AbsensiKaryawanResource extends Resource
 {
     protected static ?string $model = AbsensiKaryawan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'SDM';
+
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('karyawan_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('karyawan_id')
+                    ->relationship('karyawan', 'nama')
+                    ->searchable()
+                    ->required(),
                 Forms\Components\DatePicker::make('tanggal')
                     ->required(),
                 Forms\Components\TextInput::make('jam_masuk'),
                 Forms\Components\TextInput::make('jam_keluar'),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'hadir' => 'Hadir',
+                        'izin' => 'Izin',
+                        'sakit' => 'Sakit',
+                        'alpha' => 'Alpha',
+                    ])
+                    ->default('hadir')
                     ->required(),
                 Forms\Components\Textarea::make('catatan')
                     ->columnSpanFull(),
@@ -64,6 +76,7 @@ class AbsensiKaryawanResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

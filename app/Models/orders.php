@@ -32,7 +32,7 @@ class orders extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function alamatPengiriman()
+    public function alamatPengirimans()
     {
         return $this->belongsTo(AlamatPengirimans::class, 'alamat_pengiriman_id');
     }

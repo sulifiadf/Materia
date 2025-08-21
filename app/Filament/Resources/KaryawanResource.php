@@ -12,12 +12,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+
 
 class KaryawanResource extends Resource
 {
     protected static ?string $model = Karyawan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'SDM';
+
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
@@ -43,10 +47,15 @@ class KaryawanResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0.00),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\TextInput::make('foto')
-                    ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'aktif' => 'Aktif',
+                        'tidak_aktif' => 'Tidak Aktif',
+                        'cuti' => 'Cuti',
+                    ]),
+                Forms\Components\FileUpload::make('foto')
+                    ->image()
+                    ->imageEditor(),
             ]);
     }
 
@@ -87,6 +96,8 @@ class KaryawanResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

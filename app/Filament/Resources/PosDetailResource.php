@@ -17,6 +17,8 @@ class PosDetailResource extends Resource
 {
     protected static ?string $model = PosDetail::class;
 
+    protected static ?string $navigationGroup = 'Transaksi';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

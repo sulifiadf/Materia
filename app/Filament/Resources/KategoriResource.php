@@ -17,7 +17,11 @@ class KategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Manajemen Produk';
+
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -54,6 +58,7 @@ class KategoriResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
