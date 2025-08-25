@@ -12,6 +12,7 @@ class produk extends Model
 
     protected $fillable = [
         'kategori_id',
+        'promo_id',
         'nama_produk',
         'deskripsi',
         'harga_beli',
@@ -34,6 +35,7 @@ class produk extends Model
             'berat' => 'decimal:2',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
+            'foto_produk' => 'array',
         ];
     }
 
@@ -69,6 +71,11 @@ class produk extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
+
+    public function promo()
+    {
+        return $this->belongsTo(Promo::class, 'promo_id');
     }
 
     public function OrderItems()

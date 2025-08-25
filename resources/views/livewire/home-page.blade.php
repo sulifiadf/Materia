@@ -32,16 +32,31 @@
 
   <!-- Product Grid -->
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-    @foreach($data as $item)
+    @foreach($promo as $item)
     <!-- Card Product -->
-    <div class="bg-white rounded-lg shadow p-4 flex flex-col">
+    <div class="bg-white rounded-lg shadow p-4 flex flex-col" 
+    wire:key="{{ $item->id }}"
+    onclick="window.location='{{ route('livewire.detail-produk', ['id' => $item->id]) }}'">
+      
       <span class="bg-[#FFB97B] text-white text-xs px-2 py-1 rounded w-max">NEW</span>
-      <img src="{{asset('img/material1.png')}}" alt="Product" class="w-full h-32 object-contain mt-2">
-      <h3 class="text-sm font-semibold mt-2">Material A</h3>
+      {{-- gambar produk --}}
+          @if(is_array($item->foto_produk) && count($item->foto_produk) > 0)
+          <img src="{{ url('storage/'.$item->foto_produk[0]) }}" 
+              alt="{{ $item->nama_produk }}" 
+              class="w-full h-32 object-contain mt-2">
+      @else
+          <img src="{{ asset('img/no-image.png') }}" 
+              alt="No image" 
+              class="w-full h-32 object-contain mt-2">
+      @endif
+      
+      <h3 class="text-sm font-semibold mt-2">{{$item->nama_produk}}</h3>
       <p class="text-gray-600 text-xs">Rp 50.000</p>
-      <button class="mt-auto bg-[#424242] text-white text-sm px-3 py-1 rounded hover:bg-black">
+      <a href="/keranjang-page" wire:navigate
+        onclick="event.stopPropagation()" 
+        class="mt-auto bg-[#424242] text-white text-sm px-3 py-1 rounded hover:bg-black">
         Add to cart
-      </button>
+      </a>
       <div class="flex mt-2 text-yellow-400 text-xs">
         ★★★★☆
       </div>

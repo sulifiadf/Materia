@@ -98,10 +98,18 @@ class ProdukResource extends Resource
                             ->required()
                             ->numeric()
                             ->prefix('IDR'),
+
+                        Select::make('promo_id')
+                            ->relationship('promo', 'nama_promo')
+                            ->label('Promo')
+                            ->searchable()
+                            ->nullable(),
+
                         TextInput::make('stok')
                             ->required()
                             ->numeric()
                             ->default(0),
+
                         Select::make('satuan')
                             ->options([
                                 'pcs' => 'Pcs',
@@ -150,6 +158,9 @@ class ProdukResource extends Resource
                 Tables\Columns\TextColumn::make('harga_jual')
                     ->money('IDR')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('promo_id')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('stok')
                     ->label('Stok')
                     ->numeric()

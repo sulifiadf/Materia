@@ -19,7 +19,12 @@
         <div class="flex justify-center items-center">
             <div class="bg-white rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.15)] p-8 w-full max-w-md">
                 <h2 class="text-xl font-bold mb-4">Login</h2>
-
+                {{-- Di bagian atas form login --}}
+                @if (session()->has('success'))
+                    <div class="mb-4 p-3 bg-green-100 border border-green-300 text-green-700 rounded-lg">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <form wire:submit.prevent="login" class="space-y-4">
                     <!-- Email -->
                     <div>
@@ -44,7 +49,8 @@
 
                 <p class="text-sm text-gray-600 mt-4 text-center">
                     Not registered yet?
-                    <a href="{{route('auth.register')}}" class="text-blue-600 hover:underline">Create an account</a>
+                    <a href="/register" wire:navigate
+                        class="text-blue-600 hover:underline">Create an account</a>
                 </p>
             </div>
         </div>

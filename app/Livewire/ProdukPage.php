@@ -3,11 +3,11 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Produk;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
-use App\Models\Produk;
 
-class HomePage extends Component
+class ProdukPage extends Component
 {
     use WithFileUploads;
 
@@ -34,16 +34,10 @@ class HomePage extends Component
         session()->flash('success', 'Produk berhasil disimpan.');
         return redirect()->route('home');
     }
-
+    
     public function render()
     {
-        $promo = Produk::whereNotNull('promo_id')
-            ->where('status', 'tersedia')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return view('livewire.home-page', [
-            'promo' => $promo,
-        ]);
+        $data = Produk::where('status', 'tersedia')->get();
+        return view('livewire.produk-page', compact('data'));
     }
 }

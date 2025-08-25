@@ -12,6 +12,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
 
 class PromoResource extends Resource
 {
@@ -36,7 +39,12 @@ class PromoResource extends Resource
                 Forms\Components\TextInput::make('besar_diskon')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('tipe_diskon')
+                Forms\Components\Select::make('tipe_diskon')
+                    ->options([
+                        'persentase' => 'Persen',
+                        'nominal' => 'Nominal',
+                    ])
+                    ->default('persen')
                     ->required(),
                 Forms\Components\TextInput::make('min_pembelian')
                     ->required()
@@ -50,7 +58,12 @@ class PromoResource extends Resource
                     ->required(),
                 Forms\Components\DateTimePicker::make('tanggal_selesai')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'aktif' => 'Aktif',
+                        'nonaktif' => 'Nonaktif',
+                    ])
+                    ->default('aktif')
                     ->required(),
             ]);
     }
@@ -66,7 +79,9 @@ class PromoResource extends Resource
                 Tables\Columns\TextColumn::make('besar_diskon')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('tipe_diskon'),
+                Tables\Columns\TextColumn::make('tipe_diskon')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('min_pembelian')
                     ->numeric()
                     ->sortable(),
